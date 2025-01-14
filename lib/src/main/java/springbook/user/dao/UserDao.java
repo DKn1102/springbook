@@ -8,10 +8,10 @@ import java.sql.SQLException;
 
 import springbook.user.domain.User;
 
-public class UserDao {
+public abstract class UserDao {
 	public void add(User user) throws ClassNotFoundException, SQLException {
-//		Class.forName("org.mariadb.jdbc.Driver");
-		Connection c = DriverManager.getConnection("jdbc:mariadb://localhost:3306/board", "root", "1234");
+		Class.forName("org.mariadb.jdbc.Driver");
+		Connection c = getConnection();
 		
 		PreparedStatement ps = c.prepareStatement("insert into users(id, name, password) values(?,?,?)");
 		ps.setString(1, user.getId());
@@ -26,8 +26,8 @@ public class UserDao {
 	}
 	
 	public User get(String id) throws ClassNotFoundException, SQLException {
-//		Class.forName("com.mysql.jdbc.Driver");
-		Connection c = DriverManager.getConnection("jdbc:mariadb://localhost:3306/board", "root", "1234");
+		Class.forName("org.mariadb.jdbc.Driver");
+		Connection c = getConnection();
 		
 		PreparedStatement ps = c.prepareStatement("select * from users where id = ?");
 		
@@ -46,4 +46,13 @@ public class UserDao {
 		
 		return user;
 	}
+	
+//	private Connection getConnection() throws ClassNotFoundException, SQLException {
+//		Class.forName("org.mariadb.jdbc.Driver");
+//		Connection c = DriverManager.getConnection("jdbc:mariadb://localhost:3306/board", "root", "1234");
+//		
+//		return c;
+//	}
+	
+	public abstract Connection getConnection() throws ClassNotFoundException, SQLException;
 }
