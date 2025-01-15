@@ -2,19 +2,23 @@ package springbook.user.test;
 
 import java.sql.SQLException;
 
-import springbook.user.dao.NUserDao;
+import springbook.user.dao.ConnectionMaker;
+import springbook.user.dao.NConnectionMaker;
 import springbook.user.dao.UserDao;
 import springbook.user.domain.User;
 
-public class Test {
+public class UserDaoTest {
 
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
-		UserDao dao = new NUserDao();
+//		ConnectionMaker connectionMaker = new DConnectionMaker();
+		
+		ConnectionMaker connectionMaker = new NConnectionMaker();
+		UserDao dao = new UserDao(connectionMaker);
 		
 		User user = new User();
-		user.setId("davidN");
-		user.setName("강정구N");
-		user.setPassword("YN");
+		user.setId("david4");
+		user.setName("강정구4");
+		user.setPassword("Y4");
 		
 		dao.add(user);
 		

@@ -4,10 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-//1.2 DAO의 분리
-public class NUserDao extends UserDao {
-	public Connection getConnection() throws ClassNotFoundException, SQLException{
-		// N사 DB connection 생성코드
+//1.3 DAO의 확장
+public class SimpleConnectionMaker {
+	public Connection makeNewConnection() throws ClassNotFoundException, SQLException{
 		Class.forName("org.mariadb.jdbc.Driver");
 		Connection c = DriverManager.getConnection("jdbc:mariadb://localhost:3306/board", "root", "1234");
 		
